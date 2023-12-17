@@ -6,7 +6,13 @@ from drf_yasg import openapi
 #API policy decorators
 from rest_framework.decorators import api_view, throttle_classes
 from rest_framework.throttling import UserRateThrottle
-
+#schema
+from rest_framework.decorators import api_view, schema
+from rest_framework.schemas import AutoSchema
+#class based views
+from rest_framework import authentication, permissions
+from django.contrib.auth.models import User
+from rest_framework.views import APIView
 # Create your views here.
 
 #index page
@@ -31,15 +37,26 @@ class OncePerDayUserThrottle(UserRateThrottle):
 def throttle(request):
     return Response({"message" : "Hello for today! See you tomorrow!"})
 
-from rest_framework.decorators import api_view, schema
-from rest_framework.schemas import AutoSchema
-
+#schema
 class CustomAutoSchema(AutoSchema):
     def get_link(self, path, method, base_url):
         pass
         # override view introspection here...
-
+    
+#schema
 @api_view(['GET'])
 @schema(CustomAutoSchema())
 def schema(request):
     return Response({"message": "Hello for today! See you tomorrow!"})
+
+#class based views-View to list all users in the db
+class ListUsers(APIView):
+    def get(self, request, format=None):
+        # user = User.objects.all()
+        # usernames=[]
+        # for i in user:
+        #     usernames.append(i.username)
+        usernames = [user.username for user in User.objects.all()]
+        return Response(usernames)
+
+

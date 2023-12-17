@@ -8,6 +8,8 @@ urlpatterns = [
     path('throttle',views.throttle,name='throttle'),
     path('schema',views.schema,name='schema'),
 
+    path('users/', views.ListUsers.as_view()),
+
     
 
   
