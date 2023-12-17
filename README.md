@@ -1,10 +1,9 @@
-# DjangoRestApi
-
+#DjangoRestApi
 #Api Guides
 
-#Views
+##Views
 
-1)Functions Based Views
-@api_view()
-API policy decorators
-View schema decorator
+###Functions Based Views 
+<p>@api_view()</p>
+<p>API policy decorators</p>
+<p>View schema decorator</p>
